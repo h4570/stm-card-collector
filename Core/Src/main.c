@@ -19,11 +19,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usart.h"
+#include "spi.h"
 #include "usb_device.h"
 #include "gpio.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "usb_settings.h"
+#include "rc522.h"
 #include "FatFs/ff.h"
 #include "usbd_msc_scsi.h"
 
@@ -51,6 +54,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint8_t status;
+uint8_t str[MAX_LEN]; // Max_LEN = 16
+uint8_t sNum[5];
+
 FATFS fs;
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
@@ -125,17 +132,23 @@ int main(void)
   MX_GPIO_Init();
   MX_LPUART1_UART_Init();
   MX_USB_Device_Init();
+  MX_SPI2_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   MountAndFormatDisk();
+  MFRC522_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    status = MFRC522_Request(PICC_REQIDL, str);
+    status = MFRC522_Anticoll(str);
+    memcpy(sNum, str, 5);
+    HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -199,6 +212,21 @@ static void MX_NVIC_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+  // Callback dla zakończenia transmisji przez SPI
+}
+
+void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+  // Callback dla zakończenia odbioru przez SPI
+}
+
+void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+  // Callback dla zakończenia transmisji i odbioru przez SPI
+}
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {

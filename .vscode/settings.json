@@ -7,7 +7,8 @@
         "usbd_storage_if.h": "c",
         "string.h": "c",
         "usbd_msc_bot.h": "c",
-        "usbd_msc_scsi.h": "c"
+        "usbd_msc_scsi.h": "c",
+        "stm32g4xx_hal.h": "c"
     },
     "cortex-debug.variableUseNaturalFormat": true
 }
