@@ -145,8 +145,34 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+    uint8_t version;
+    uint8_t address = 0x80 | (0x37 & 0x7E); // MSB = 1 for reading, address is 7 bits
+
+    HAL_GPIO_WritePin(RC522_CS_GPIO_Port, RC522_CS_Pin, GPIO_PIN_RESET); // Assert CS (if using GPIO for NSS)
+
+    HAL_SPI_Transmit(&hspi2, &address, 1, 50);
+    HAL_SPI_Receive(&hspi2, &version, 1, 50);
+
+    HAL_GPIO_WritePin(RC522_CS_GPIO_Port, RC522_CS_Pin, GPIO_PIN_SET); // De-assert CS
+
+    if (version != 0)
+    {
+      int i = 1;
+    }
+
+    // ---
+
     status = MFRC522_Request(PICC_REQIDL, str);
+    if (status == MI_OK)
+    {
+      int i = 1;
+    }
     status = MFRC522_Anticoll(str);
+    if (status == MI_OK)
+    {
+      int x = 1;
+    }
     memcpy(sNum, str, 5);
     HAL_Delay(100);
     /* USER CODE END WHILE */
@@ -213,20 +239,20 @@ static void MX_NVIC_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
-{
-  // Callback dla zakończenia transmisji przez SPI
-}
+// void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+// {
+//   // Callback dla zakończenia transmisji przez SPI
+// }
 
-void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi)
-{
-  // Callback dla zakończenia odbioru przez SPI
-}
+// void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi)
+// {
+//   // Callback dla zakończenia odbioru przez SPI
+// }
 
-void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
-{
-  // Callback dla zakończenia transmisji i odbioru przez SPI
-}
+// void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
+// {
+//   // Callback dla zakończenia transmisji i odbioru przez SPI
+// }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {

@@ -8,10 +8,10 @@ extern SPI_HandleTypeDef hspi2;
 #define MAX_LEN 16
 
 #define HSPI_INSTANCE &hspi2
-#define MFRC522_CS_PORT GPIOA
-#define MFRC522_CS_PIN GPIO_PIN_4
+#define MFRC522_CS_PORT GPIOB
+#define MFRC522_CS_PIN GPIO_PIN_10
 #define MFRC522_RST_PORT GPIOB
-#define MFRC522_RST_PIN GPIO_PIN_0
+#define MFRC522_RST_PIN GPIO_PIN_2
 
 // MFRC522 commands. Described in chapter 10 of the datasheet.
 #define PCD_IDLE 0x00       // no action, cancels current command execution
