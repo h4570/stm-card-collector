@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "usb_settings.h": "c",
+        "diskio.h": "c",
+        "ff.h": "c",
+        "diskio_ram_glue.h": "c",
+        "usbd_storage_if.h": "c",
+        "string.h": "c",
+        "usbd_msc_bot.h": "c",
+        "usbd_msc_scsi.h": "c"
+    },
+    "cortex-debug.variableUseNaturalFormat": true
+}
