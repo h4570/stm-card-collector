@@ -9,7 +9,7 @@ extern SPI_HandleTypeDef hspi2;
 
 #define HSPI_INSTANCE &hspi2
 #define MFRC522_CS_PORT GPIOB
-#define MFRC522_CS_PIN GPIO_PIN_10
+#define MFRC522_CS_PIN GPIO_PIN_1
 #define MFRC522_RST_PORT GPIOB
 #define MFRC522_RST_PIN GPIO_PIN_2
 

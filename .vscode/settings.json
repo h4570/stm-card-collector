@@ -8,7 +8,10 @@
         "string.h": "c",
         "usbd_msc_bot.h": "c",
         "usbd_msc_scsi.h": "c",
-        "stm32g4xx_hal.h": "c"
+        "stm32g4xx_hal.h": "c",
+        "rc522.h": "c",
+        "stdlib.h": "c",
+        "type_traits": "c"
     },
     "cortex-debug.variableUseNaturalFormat": true
 }

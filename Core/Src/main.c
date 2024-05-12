@@ -29,6 +29,7 @@
 #include "rc522.h"
 #include "FatFs/ff.h"
 #include "usbd_msc_scsi.h"
+#include <stdlib.h>
 
 // ================ PORADNIK
 // https://www.youtube.com/watch?v=Us_sTdGGcOQ&ab_channel=ControllersTech
@@ -54,9 +55,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t status;
 uint8_t str[MAX_LEN]; // Max_LEN = 16
-uint8_t sNum[5];
+uint8_t sNum[MAX_LEN];
+char tagString[8];
 
 FATFS fs;
 extern USBD_HandleTypeDef hUsbDeviceFS;
@@ -145,36 +146,40 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    // uint8_t reg = 0x37;
+    // uint8_t version;
+    // uint8_t address = ((reg << 1) & 0x7E) | 0x80; // MSB = 1 for reading, address is 7 bits
 
-    uint8_t version;
-    uint8_t address = 0x80 | (0x37 & 0x7E); // MSB = 1 for reading, address is 7 bits
+    // HAL_GPIO_WritePin(RC522_CS_GPIO_Port, RC522_CS_Pin, GPIO_PIN_RESET); // Assert CS (if using GPIO for NSS)
 
-    HAL_GPIO_WritePin(RC522_CS_GPIO_Port, RC522_CS_Pin, GPIO_PIN_RESET); // Assert CS (if using GPIO for NSS)
+    // HAL_SPI_Transmit(&hspi2, &address, 1, 50);
+    // HAL_SPI_Receive(&hspi2, &version, 1, 50);
 
-    HAL_SPI_Transmit(&hspi2, &address, 1, 50);
-    HAL_SPI_Receive(&hspi2, &version, 1, 50);
+    // HAL_GPIO_WritePin(RC522_CS_GPIO_Port, RC522_CS_Pin, GPIO_PIN_SET); // De-assert CS
 
-    HAL_GPIO_WritePin(RC522_CS_GPIO_Port, RC522_CS_Pin, GPIO_PIN_SET); // De-assert CS
-
-    if (version != 0)
-    {
-      int i = 1;
-    }
+    // if (version != 0)
+    // {
+    //   int i = 1;
+    // }
 
     // ---
 
-    status = MFRC522_Request(PICC_REQIDL, str);
-    if (status == MI_OK)
+    uint8_t status1 = MFRC522_Request(PICC_REQIDL, str);
+
+    uint8_t status2 = MFRC522_Anticoll(str);
+
+    memcpy(sNum, str, 16);
+    HAL_Delay(100);
+
+    if (status2 == MI_OK)
     {
-      int i = 1;
-    }
-    status = MFRC522_Anticoll(str);
-    if (status == MI_OK)
-    {
+      itoa(sNum[0], tagString, 16);
+      itoa(sNum[1], &tagString[1 * 2], 16);
+      itoa(sNum[2], &tagString[2 * 2], 16);
+      itoa(sNum[3], &tagString[3 * 2], 16);
       int x = 1;
     }
-    memcpy(sNum, str, 5);
-    HAL_Delay(100);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
