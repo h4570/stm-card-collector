@@ -1,0 +1,86 @@
+// Start
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="padding: 20px 0 30px 0;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc; border-collapse: collapse;">
+// Spacing
+<tr><td style="padding: {{SIZE_PX}}px 0px 0px 0px;"></td></tr>
+// PictureHref
+<tr>
+    <td align="center" bgcolor="#000000" style="padding: 40px 0 40px 0;">
+        <a href="{{HREF}}" target="_blank">
+            <img src="{{SRC}}" alt="{{ALT}}" width="{{WIDTH}}" height="{{HEIGHT}}" style="display: block;" />
+        </a>
+    </td>
+</tr>
+// Picture
+<tr>
+    <td align="center" bgcolor="#000000" style="padding: 40px 0 40px 0;">
+        <img src="{{SRC}}" alt="{{ALT}}" width="{{WIDTH}}" height="{{HEIGHT}}" style="display: block;" />
+    </td>
+</tr>
+// Paragraph
+<tr>
+    <td bgcolor="#ffffff" style="padding: 0px 30px 0px 30px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+                    {{CONTENT}}
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+// Header
+<tr>
+    <td bgcolor="#ffffff" style="padding: 0px 30px 0px 30px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="color: #153643; font-family: Arial, sans-serif; font-size: 24px;">
+                    <b>{{CONTENT}}</b>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+// Footer
+<tr>
+    <td bgcolor="#1D1A27" style="padding: 30px 30px 30px 30px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;" width="75%">
+                    &reg; ezclips.app {{YEAR}}<br />
+                </td>
+                <td align="right" width="25%">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <a href="https://studio.ezclips.app" target="_blank">
+                                <img src="https://studio.ezclips.app/assets/logo/compact.png" alt="Logo" width="100" height="auto" style="display: block;" />
+                            </a>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+// End
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
